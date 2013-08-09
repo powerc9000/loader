@@ -32,3 +32,14 @@ Using the `loader.load(el, src)` method you can load whatever document into what
 var el = document.getElementById("id");
 loader.load(el, "test.html");
 ```
+
+Aditional notes
+-----------------
+
+loader automatically runs when the page loads to change this and specify when you want it to load pages. (This won't affect pages loaded with `loader.load()`);
+
+`loader.runOnLoad(false)`
+
+To Disable loading when the page loads
+
+`loader.run()` to controll when the loader runs.

@@ -1,9 +1,12 @@
 window.loader = (function(){
     var l;
     var cb;
+    var runOnLoad = true;
     window.addEventListener("load", function(){
-        loader();
-    })
+        if(runOnLoad){
+            loader();
+        }
+    });
     function sanitizeAndLoad(el, scope){
         var html = gotFile.call(scope);
         var dom = HTMLParser(html);
@@ -18,7 +21,6 @@ window.loader = (function(){
                 if(this.status === 200){
                     sanitizeAndLoad(el, this);
                 }
-               
             }
             xhrReq.open("get", src);
             xhrReq.send();
@@ -35,7 +37,11 @@ window.loader = (function(){
     }
     l = {
        onLoad: function(c){
-         cb = c;
+            cb = c;
+            return this;
+       },
+       runOnLoad: function(yes){
+            runOnLoad = yes;
        },
        load: function(el, src){
             var xhrReq = new XMLHttpRequest();
@@ -46,6 +52,10 @@ window.loader = (function(){
             }
             xhrReq.open("get", src);
             xhrReq.send();
+            return this;
+       },
+       run: function(){
+            loader();
        }
     }
     return l;
