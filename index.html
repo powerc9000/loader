@@ -8,11 +8,16 @@
                 var template = Handlebars.compile(result);
                 var stuff = {hey:"hey"}
                 return template(stuff);
-            })
+            });
         </script>
     </head>
     <body>
         <div data-load="other.html"></div>
         <div data-load="dat.html"></div>
+        <div id="tops"></div>
+        <script>
+            var div = document.getElementById("tops");
+            loader.load(div, "other.html");
+        </script>
     </body>
 </html>

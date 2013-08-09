@@ -22,3 +22,13 @@ loader.onLoad(function(result){
     return template(stuff);
 })
 ```
+
+Other ways to load
+-----------------------
+
+Using the `loader.load(el, src)` method you can load whatever document into whatever element
+
+```javascript
+var el = document.getElementById("id");
+loader.load(el, "test.html");
+```
