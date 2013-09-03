@@ -14,12 +14,14 @@ Using with templating engine eg handlebars
 -------------------------------------------
 
 use the `loader.load(callback)` method to get the result of each load and do what you need to do eg
+use `load.addScope(scopeName, values)` and `<div data-scope="scopeName"></div>` to add data to be loaded on a per template basis
+the scope is passed into the loader.onLoad callback.
+
 
 ```javascript
-loader.onLoad(function(result){
+loader.onLoad(function(result, scope){
     var template = Handlebars.compile(result);
-    var stuff = {hey:"hey"}
-    return template(stuff);
+    return template(scope);
 })
 ```
 

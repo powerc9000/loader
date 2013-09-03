@@ -4,20 +4,17 @@
         <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0/handlebars.min.js"></script>
         <script src="loader.js"></script>
         <script>
-            loader.onLoad(function(result){
+            loader.addScope("sidebar", {"hey": "hey", "easy":"does it"});
+            loader.onLoad(function(result, scope){
                 var template = Handlebars.compile(result);
-                var stuff = {hey:"hey"}
-                return template(stuff);
+                return template(scope);
+            }, function(){
+                h1.style.color = "red";
             });
         </script>
     </head>
     <body>
-        <div data-load="other.html"></div>
-        <div data-load="dat.html"></div>
+        <div data-load="other.html" data-scope="sidebar"></div>
         <div id="tops"></div>
-        <script>
-            var div = document.getElementById("tops");
-            loader.load(div, "other.html");
-        </script>
     </body>
 </html>
