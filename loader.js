@@ -55,7 +55,7 @@ window.loader = (function(){
        },
        load: function(el, src, cb){
             var scope = el.getAttribute("data-scope");
-            fetch(el, src, scope);
+            fetch(el, src, scope, cb);
        },
        addScope: function(name, data){
             scopes[name] = data;
