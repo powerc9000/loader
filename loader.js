@@ -9,10 +9,11 @@ window.loader = (function(){
             loader();
         }
     });
-    function sanitizeAndLoad(el, scope, xhrResponse){
+    function sanitizeAndLoad(el, scope, xhrResponse, cb){
         var html = gotFile.call(xhrResponse, scope);
         var dom = HTMLParser(html);
         el.innerHTML = dom;
+        cb && cb();
         loadedInDomCB && loadedInDomCB();
     }
     function loader(){
@@ -23,11 +24,11 @@ window.loader = (function(){
             fetch(el, src, scope);
         });
     }
-    function fetch(el, src, scope){
+    function fetch(el, src, scope, cb){
         var xhrReq = new XMLHttpRequest();
         xhrReq.onload = function(){
             if(this.status === 200){
-                sanitizeAndLoad(el, scope, this);
+                sanitizeAndLoad(el, scope, this, cb);
             }
         }
         xhrReq.open("get", src);
@@ -52,7 +53,7 @@ window.loader = (function(){
        runOnLoad: function(yes){
             runOnLoad = yes;
        },
-       load: function(el, src){
+       load: function(el, src, cb){
             var scope = el.getAttribute("data-scope");
             fetch(el, src, scope);
        },
